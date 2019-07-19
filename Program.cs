@@ -2,7 +2,7 @@
 // Project Name: Manipulating-Arrays
 // Author: Orndoff, Robert K.
 // Date created: 07/17/2019
-// Date last modified: 07/17/2019
+// Date last modified: 07/18/2019
 //
 // C#
 using System;
@@ -17,17 +17,17 @@ namespace Manipulating_Arrays
             int[] arrayB = new int[5] { 1, 3, 5, 7, 9 };
             int[] arrayC = new int[12] { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 9 };
 
-            ////Counting, summing, computing the mean
-            //Console.WriteLine($"The average of Array A is:{CountSumAverage(arrayA)}");
-            //Console.WriteLine($"\nThe average of Array B is:{CountSumAverage(arrayB)}");
-            //Console.WriteLine($"\nThe average of Array C is:{CountSumAverage(arrayC)}");
+            //Counting, summing, computing the mean
+            Console.WriteLine($"\nThe average of Array A is:{CountSumAverage(arrayA)}");
+            Console.WriteLine($"\nThe average of Array B is:{CountSumAverage(arrayB)}");
+            Console.WriteLine($"\nThe average of Array C is:{CountSumAverage(arrayC)}");
 
-            ////Reversing Arrays
-            //PrintCollection(ReverseArray(arrayA));
-            //PrintCollection(ReverseArray(arrayB));
-            //PrintCollection(ReverseArray(arrayC));
+            //Reversing Arrays
+            PrintCollection(ReverseArray(arrayA));
+            PrintCollection(ReverseArray(arrayB));
+            PrintCollection(ReverseArray(arrayC));
 
-            ////Rotating arrays
+            //Rotating arrays
             string direction = "L";
             int places = 2;
             PrintCollection(RotateArray(direction, places, arrayA));
@@ -39,8 +39,8 @@ namespace Manipulating_Arrays
             places = 4;
             PrintCollection(RotateArray(direction, places, arrayC));
 
-            ////Sorting arrays (It's Pi!)
-            //SortArray(arrayC);
+            //Sorting arrays (It's Pi!)
+            PrintCollection(SortArray(arrayC));
         }
 
 
@@ -85,25 +85,21 @@ namespace Manipulating_Arrays
                     {
                         tempArray[i-places] = array[i];
                     }
-
                 }
                 Console.WriteLine($"\nShifted {places} places to the {direction}, the array now looks like this:");
             }
             else
             {
-                int counter = places -1;
                 for (int i = array.Length - 1; i >= 0; --i)
                 {
                     if (i > places)
                     {
-                        tempArray[counter] = array[i];
-                        counter--;
+                        tempArray[i - 1 - places] = array[i];
                     }
                     else if (i <= array.Length)
                     {
                         tempArray[i+places] = array[i];
                     }
-
                 }
                 Console.WriteLine($"\nShifted {places} places to the {direction}, the array now looks like this:");
             }
@@ -111,19 +107,35 @@ namespace Manipulating_Arrays
         }
 
 
-        static void SortArray(int[] array)
+        static int[] SortArray(int[] array)
         {
+            bool test = true;
+            int bucket = 0;
+            for(int i = 1; (i <= array.Length) && test; i++)
+            {
+                test = false;
+                for (int j = 0; j < (array.Length - 1); j++)
+                {
+                    if (array[j + 1] > array[j])
+                    {
+                        bucket = array[j];
+                        array[j] = array[j + 1];
+                        array[j + 1] = bucket;
+                        test = true;
+                    }
+                }
+            }
+            Console.WriteLine($"\nThe first 12 digits of Pi sorted is:");
 
+            return array;
         }
+
 
         static void PrintCollection<T>(T[] toPrint, bool oneIndexed = false)
         {
             string PrintWithIndex(int index) => $"{index + (oneIndexed ? 1 : 0)}: {toPrint[index]}, ";
-
             int i = 0;
-
             Console.Write("{ ");
-
             for (; i < toPrint.Length - 1; ++i)
             {
                 Console.Write($"{PrintWithIndex(i)} ");
