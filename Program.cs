@@ -2,7 +2,7 @@
 // Project Name: Manipulating-Arrays
 // Author: Orndoff, Robert K.
 // Date created: 07/17/2019
-// Date last modified: 07/18/2019
+// Date last modified: 07/19/2019
 //
 // C#
 using System;
@@ -18,28 +18,35 @@ namespace Manipulating_Arrays
             int[] arrayC = new int[12] { 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 9 };
 
             //Counting, summing, computing the mean
-            Console.WriteLine($"\nThe average of Array A is:{CountSumAverage(arrayA)}");
-            Console.WriteLine($"\nThe average of Array B is:{CountSumAverage(arrayB)}");
-            Console.WriteLine($"\nThe average of Array C is:{CountSumAverage(arrayC)}");
+            Console.WriteLine($"\nThe average of array A is:{CountSumAverage(arrayA)}");
+            Console.WriteLine($"\nThe average of array B is:{CountSumAverage(arrayB)}");
+            Console.WriteLine($"\nThe average of array C is:{CountSumAverage(arrayC)}");
 
             //Reversing Arrays
+            Console.WriteLine("\nThe reverse of array A is:");
             PrintCollection(ReverseArray(arrayA));
+            Console.WriteLine("\nThe reverse of array B is:");
             PrintCollection(ReverseArray(arrayB));
+            Console.WriteLine("\nThe reverse of array C is:");
             PrintCollection(ReverseArray(arrayC));
 
             //Rotating arrays
             string direction = "L";
             int places = 2;
+            Console.WriteLine($"\nShifted {places} places to the {direction}, array A now looks like this:");
             PrintCollection(RotateArray(direction, places, arrayA));
 
             direction = "R";
+            Console.WriteLine($"\nShifted {places} places to the {direction}, array B now looks like this:");
             PrintCollection(RotateArray(direction, places, arrayB));
 
             direction = "L";
             places = 4;
+            Console.WriteLine($"\nShifted {places} places to the {direction}, array C now looks like this:");
             PrintCollection(RotateArray(direction, places, arrayC));
 
             //Sorting arrays (It's Pi!)
+            Console.WriteLine($"\nThe first 12 digits of Pi sorted is:");
             PrintCollection(SortArray(arrayC));
         }
 
@@ -56,16 +63,16 @@ namespace Manipulating_Arrays
         }
 
 
-        static T[] ReverseArray<T>(T[] array)
+        static int[] ReverseArray(int[] array)
         {
             int v = 0;
-            T[] new_Array = new T[array.Length];
+            int[] new_Array = new int[array.Length];
             for(int i = array.Length - 1; i >= 0; i--)
             {
                 new_Array[v] = array[i];
                 ++v;
             }
-            Console.WriteLine("\nThe reverse of the array is:");
+            
             return new_Array;
         }
 
@@ -86,7 +93,6 @@ namespace Manipulating_Arrays
                         tempArray[i-places] = array[i];
                     }
                 }
-                Console.WriteLine($"\nShifted {places} places to the {direction}, the array now looks like this:");
             }
             else
             {
@@ -101,8 +107,8 @@ namespace Manipulating_Arrays
                         tempArray[i+places] = array[i];
                     }
                 }
-                Console.WriteLine($"\nShifted {places} places to the {direction}, the array now looks like this:");
             }
+
             return tempArray;
         }
 
@@ -125,7 +131,6 @@ namespace Manipulating_Arrays
                     }
                 }
             }
-            Console.WriteLine($"\nThe first 12 digits of Pi sorted is:");
 
             return array;
         }
